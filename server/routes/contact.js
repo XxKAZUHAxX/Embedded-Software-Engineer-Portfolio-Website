@@ -1,24 +1,43 @@
 import { Router } from 'express';
 import { body, validationResult } from 'express-validator';
-import nodemailer from 'nodemailer';
 
 const router = Router();
 
 /**
- * Build a Nodemailer transport from environment variables.
- * Created lazily so the server can still boot without mail configured
- * (useful in dev — submissions are logged instead of sent).
+ * Send an email via the Resend HTTP API.
+ * Returns true on success, null if RESEND_API_KEY is not configured (dev mode).
  */
-function createTransport() {
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return null;
+async function sendViaResend({ name, email, message, recipient }) {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return null;
 
-  return nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT) || 587,
-    secure: Number(SMTP_PORT) === 465, // true for 465, false for 587/STARTTLS
-    auth: { user: SMTP_USER, pass: SMTP_PASS },
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      from: 'Portfolio Contact <onboarding@resend.dev>',
+      to: [recipient],
+      reply_to: email,
+      subject: `New portfolio message from ${name}`,
+      text: `From: ${name} <${email}>\n\n${message}`,
+      html: `
+        <h2>New portfolio contact</h2>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+        <p><strong>Message:</strong></p>
+        <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
+      `,
+    }),
   });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `Resend error ${res.status}`);
+  }
+  return true;
 }
 
 // Escape user input before embedding it in the HTML email body (anti-XSS).
@@ -55,35 +74,15 @@ router.post(
 
     const { name, email, message } = req.body;
     const recipient = process.env.CONTACT_TO || 'jesryljade18@gmail.com';
-    const transport = createTransport();
-
-    // Dev fallback: no SMTP configured — log instead of failing.
-    if (!transport) {
-      console.log('[contact] (no SMTP configured) submission received:', {
-        name,
-        email,
-        message,
-      });
-      return res.status(200).json({
-        message: 'Message received (dev mode — email not sent).',
-      });
-    }
 
     try {
-      await transport.sendMail({
-        from: `"Portfolio Contact" <${process.env.SMTP_USER}>`,
-        to: recipient,
-        replyTo: email,
-        subject: `New portfolio message from ${name}`,
-        text: `From: ${name} <${email}>\n\n${message}`,
-        html: `
-          <h2>New portfolio contact</h2>
-          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-          <p><strong>Message:</strong></p>
-          <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
-        `,
-      });
+      const result = await sendViaResend({ name, email, message, recipient });
+
+      // Dev fallback: RESEND_API_KEY not configured — log instead of failing.
+      if (result === null) {
+        console.log('[contact] (no RESEND_API_KEY) submission received:', { name, email, message });
+        return res.status(200).json({ message: 'Message received (dev mode — email not sent).' });
+      }
 
       return res.status(200).json({ message: "Message sent — I'll get back to you soon!" });
     } catch (err) {

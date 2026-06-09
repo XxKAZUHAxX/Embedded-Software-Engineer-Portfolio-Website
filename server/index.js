@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 5000;
 
 // --- Security & parsing middleware ---------------------------------------
 app.disable('x-powered-by');
+// Trust Render's reverse proxy so express-rate-limit reads the correct client IP.
+app.set('trust proxy', 1);
 
 // Restrict CORS to the configured frontend origin(s).
 // CLIENT_ORIGIN may be a comma-separated list (e.g. local + production).
