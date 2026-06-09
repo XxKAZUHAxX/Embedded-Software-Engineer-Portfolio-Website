@@ -7,13 +7,11 @@ export const profile = {
   name: 'Jesryl Jade Lazaga',
   nickname: 'Jade',
   title: 'Embedded Software Engineer',
-  tagline:
-    'I write firmware that talks to hardware — and recently, web apps that talk to users.',
+  tagline: 'I write firmware that talks to hardware — and recently, web apps that talk to users.',
   location: 'Philippines',
   email: 'jesryljade18@gmail.com',
   phone: '0969-169-8098',
   linkedin: 'https://www.linkedin.com/in/jesryl-jade-lazaga-b17742188',
-  // Drop a real CV file at client/public/cv.pdf to enable the download button.
   cv: '/cv.pdf',
 };
 
@@ -57,7 +55,20 @@ export const skillGroups = [
     id: 'protocols',
     label: 'Protocols',
     category: 'Protocols',
-    skills: ['UART', 'SPI', 'I2C', 'I2S', 'CAN', 'RS232', 'RS485', 'LoRaWAN', 'MQTT', 'BLE', 'WiFi', 'USB'],
+    skills: [
+      'UART',
+      'SPI',
+      'I2C',
+      'I2S',
+      'CAN',
+      'RS232',
+      'RS485',
+      'LoRaWAN',
+      'MQTT',
+      'BLE',
+      'WiFi',
+      'USB',
+    ],
   },
   {
     id: 'frontend',
@@ -110,10 +121,7 @@ export const experience = [
     org: 'Technological University of the Philippines',
     type: 'Education',
     period: 'Graduated Oct 2024',
-    points: [
-      'Cum Laude.',
-      'Best in Thesis Award — vision-based illegal parking alert system.',
-    ],
+    points: ['Cum Laude.', 'Best in Thesis Award — vision-based illegal parking alert system.'],
   },
 ];
 
@@ -134,7 +142,7 @@ export const projects = [
     blurb:
       'Reserves and monitors accessible parking for persons with disabilities using YOLOv8 detection and EasyOCR for live license-plate recognition.',
     tags: ['YOLOv8', 'EasyOCR', 'Python', 'OCR'],
-    repo: '#TODO',
+    repo: 'https://github.com/XxKAZUHAxX/Automated-PWD-Parking-Assistance-System.git',
     demo: null,
   },
   {
@@ -143,7 +151,7 @@ export const projects = [
     blurb:
       'Measures real-time power with a PZEM sensor on Arduino + ESP32, streaming readings to a cloud dashboard for remote energy monitoring.',
     tags: ['ESP32', 'Arduino', 'PZEM', 'Cloud', 'MQTT'],
-    repo: '#TODO',
+    repo: 'https://github.com/XxKAZUHAxX/PZEM_DATA_LOGGER.git',
     demo: null,
   },
   {
@@ -161,7 +169,7 @@ export const projects = [
     blurb:
       'Tracks marine vessels (motorbanca) over long range using LoRaWAN telemetry visualized on a ThingsBoard dashboard.',
     tags: ['LoRaWAN', 'ThingsBoard', 'Telemetry', 'IoT'],
-    repo: '#TODO',
+    repo: 'https://github.com/XxKAZUHAxX/motorbanca-tracking-system-using-lorawan.git',
     demo: null,
   },
 ];
