@@ -1,0 +1,100 @@
+.timeline {
+  max-width: 760px;
+}
+
+.tl-item {
+  position: relative;
+  padding-left: var(--sp-12);
+  padding-bottom: var(--sp-8);
+}
+
+.tl-item:last-child {
+  padding-bottom: 0;
+}
+
+/* The vertical trace line */
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  bottom: -6px;
+  width: 2px;
+  background: var(--border-strong);
+}
+.tl-item:last-child::before {
+  display: none;
+}
+
+/* The node marker — a glowing solder point */
+.tl-item__node {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-faint);
+}
+
+.tl-item__card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-6);
+  transition: border-color 0.2s var(--ease);
+}
+.tl-item__card:hover {
+  border-color: var(--border-strong);
+}
+
+.tl-item__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+}
+
+.tl-item__role {
+  font-size: var(--fs-lg);
+  color: var(--text);
+}
+
+.tl-item__period {
+  font-size: var(--fs-sm);
+  color: var(--accent);
+}
+
+.tl-item__org {
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: var(--sp-1);
+  margin-bottom: var(--sp-3);
+}
+
+.tl-item__type {
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.tl-item__points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.tl-item__points li {
+  position: relative;
+  padding-left: var(--sp-4);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+.tl-item__points li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}

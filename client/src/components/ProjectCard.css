@@ -1,0 +1,120 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 100%;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--border-strong);
+}
+
+/* Visual header with the category glyph */
+.card__visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 140px;
+  color: var(--tint);
+  background:
+    radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--tint) 14%, transparent), transparent 60%),
+    repeating-linear-gradient(0deg, var(--bg-inset), var(--bg-inset) 22px, #0c1119 22px, #0c1119 23px);
+  border-bottom: 1px solid var(--border);
+}
+
+.card__visual svg {
+  width: 88px;
+  height: 88px;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--tint) 35%, transparent));
+}
+
+.card__award {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: #1a1300;
+  background: var(--cat-vision);
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding: var(--sp-6);
+  flex: 1;
+}
+
+.card__cat {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tint);
+  border: 1px solid color-mix(in srgb, var(--tint) 40%, transparent);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+}
+
+.card__title {
+  font-size: var(--fs-lg);
+  color: var(--text);
+}
+
+.card__blurb {
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}
+
+.card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: auto;
+}
+
+.card__tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+  background: var(--bg-inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.5rem;
+}
+
+.card__links {
+  display: flex;
+  gap: var(--sp-4);
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border);
+}
+
+.card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  transition: color 0.2s var(--ease);
+}
+.card__link:hover {
+  color: var(--accent);
+}

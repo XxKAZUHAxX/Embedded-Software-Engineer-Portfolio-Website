@@ -1,0 +1,84 @@
+.skills__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-8);
+}
+
+.skills__tab {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+.skills__tab:hover {
+  color: var(--text);
+  border-color: var(--text-dim);
+}
+.skills__tab.is-active {
+  color: #04130b;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-8);
+}
+
+.skills__group {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-6);
+}
+
+.skills__group-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-base);
+  color: var(--text);
+  margin-bottom: var(--sp-4);
+}
+
+.skills__group-cat {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+}
+.skills__group-cat[data-cat='Embedded'] {
+  background: var(--cat-embedded);
+  box-shadow: 0 0 8px var(--cat-embedded);
+}
+.skills__group-cat[data-cat='Protocols'] {
+  background: var(--cat-iot);
+  box-shadow: 0 0 8px var(--cat-iot);
+}
+.skills__group-cat[data-cat='Web'] {
+  background: var(--cat-web);
+  box-shadow: 0 0 8px var(--cat-web);
+}
+.skills__group-cat[data-cat='Tools'] {
+  background: var(--text-muted);
+}
+
+.skills__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+@media (min-width: 640px) {
+  .skills__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

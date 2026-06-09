@@ -1,0 +1,29 @@
+.section {
+  padding-block: var(--sp-24);
+  scroll-margin-top: var(--nav-h);
+  position: relative;
+}
+
+/* Hairline divider that looks like a faint signal trace between sections */
+.section + .section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, var(--maxw));
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-strong) 20%,
+    var(--border-strong) 80%,
+    transparent
+  );
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: var(--sp-16);
+  }
+}

@@ -1,0 +1,249 @@
+/* ============================================================================
+   Design Tokens — "Firmware Terminal" theme
+   One accent color (oscilloscope phosphor green). Mobile-first.
+   ========================================================================== */
+:root {
+  /* --- Color: surfaces --- */
+  --bg: #0d1117; /* near-black navy/charcoal base */
+  --bg-elevated: #161b22; /* cards, nav, raised surfaces */
+  --bg-inset: #0a0e14; /* terminal window, code wells */
+  --border: #21262d; /* hairline borders */
+  --border-strong: #30363d;
+
+  /* --- Color: accent (the only one) --- */
+  --accent: #00ff88; /* logic-analyzer / scope-trace green */
+  --accent-dim: #0bd478; /* slightly muted for large fills */
+  --accent-glow: rgba(0, 255, 136, 0.15);
+  --accent-faint: rgba(0, 255, 136, 0.08);
+
+  /* --- Color: text --- */
+  --text: #e6edf3; /* primary body text */
+  --text-muted: #9aa7b4; /* secondary text */
+  --text-dim: #6e7b8a; /* captions, labels */
+
+  /* --- Category accents (derived hues for chips only, kept subtle) --- */
+  --cat-embedded: #00ff88;
+  --cat-vision: #ffb800;
+  --cat-iot: #00d4ff;
+  --cat-web: #b388ff;
+
+  /* --- Typography --- */
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* fluid type scale */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: clamp(1.25rem, 1rem + 1.2vw, 1.6rem);
+  --fs-2xl: clamp(1.6rem, 1.2rem + 2vw, 2.4rem);
+  --fs-3xl: clamp(2.2rem, 1.4rem + 4vw, 4rem);
+
+  /* --- Spacing scale --- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-24: 6rem;
+
+  /* --- Misc --- */
+  --radius: 10px;
+  --radius-sm: 6px;
+  --maxw: 1100px;
+  --nav-h: 64px;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-lift: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--accent-faint);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Breakpoints reference (used in component CSS):
+   sm: 480px, md: 768px, lg: 1024px, xl: 1440px --- */
+
+/* ============================================================================
+   Reset & base
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ============================================================================
+   Utility / layout helpers
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--sp-6);
+}
+
+.accent {
+  color: var(--accent);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Screen-reader-only (skip link, labels) */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip-to-content link for keyboard users */
+.skip-link {
+  position: absolute;
+  left: var(--sp-4);
+  top: -64px;
+  z-index: 1000;
+  background: var(--accent);
+  color: #04130b;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  transition: top 0.2s var(--ease);
+}
+.skip-link:focus {
+  top: var(--sp-4);
+}
+
+/* Section label kicker — looks like a serial register tag */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+.kicker::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--accent);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.section-title {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--sp-4);
+}
+
+.section-intro {
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin-bottom: var(--sp-12);
+}
+
+/* ============================================================================
+   Accessible focus ring (matches accent)
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ============================================================================
+   Reduced motion — honor user preference
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Custom scrollbar (subtle, on-theme) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}
+
+::selection {
+  background: var(--accent);
+  color: #04130b;
+}
