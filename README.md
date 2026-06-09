@@ -96,10 +96,6 @@ npm run dev
 All copy lives in [`client/src/data/content.js`](client/src/data/content.js).
 Edit that one file to update the bio, skills, experience, and projects.
 
-- **Photo:** drop `jade.jpg` into `client/public/` and point the About section to it.
-- **CV:** drop `cv.pdf` into `client/public/` to wire up the "Download CV" button.
-- **Project links:** replace each `repo: '#TODO'` with the real GitHub URL.
-
 ---
 
 ## Deployment
