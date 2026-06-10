@@ -27,7 +27,7 @@ export const bootLines = [
 // Typed out char-by-char as a printf debug log in the hero.
 export const heroLog = [
   'printf("Hi, I\'m Jade — Embedded Software Engineer.\\n");',
-  'printf("Henny Penny | YenkoDev | TUP Cum Laude.\\n");',
+  'printf("Henny Penny | YenkoDev.\\n");',
   'printf("status: READY — let\'s build something.\\n");',
 ];
 
@@ -49,7 +49,19 @@ export const skillGroups = [
     id: 'hardware',
     label: 'MCUs & Hardware',
     category: 'Embedded',
-    skills: ['ARM', 'AVR', 'ESP32 / ESP-IDF', 'NRF52', 'STM32', 'JTAG', 'SWD', 'STLINK'],
+    skills: ['ARM', 'AVR', 'EspressIf', 'NRF52', 'STM32'],
+  },
+  {
+    id: 'debugger',
+    label: 'Debuggers',
+    category: 'Embedded',
+    skills: ['JTAG', 'SWD', 'STLINK'],
+  },
+  {
+    id: 'scripts',
+    label: 'Scripting & Automation',
+    category: 'Embedded',
+    skills: ['Python', 'Bash', 'Shell scripting'],
   },
   {
     id: 'protocols',
@@ -83,10 +95,26 @@ export const skillGroups = [
     skills: ['Node.js', 'Express', 'EJS', 'PostgreSQL', 'MongoDB', 'SQLite'],
   },
   {
-    id: 'tools',
-    label: 'DevOps & Tools',
+    id: 'software-tools',
+    label: 'DevOps & Software Tools',
     category: 'Tools',
-    skills: ['Git', 'Docker', 'CMake', 'Makefile', 'Postman', 'JIRA', 'Confluence', 'npm'],
+    skills: [
+      'Git',
+      'Docker',
+      'ESP-IDF',
+      'CMake',
+      'Makefile',
+      'Postman',
+      'JIRA',
+      'Confluence',
+      'npm',
+    ],
+  },
+  {
+    id: 'hardware-tools',
+    label: 'Hardware Tools',
+    category: 'Tools',
+    skills: ['Multimeters', 'Oscilloscopes', 'Logic Analyzers', 'Soldering'],
   },
 ];
 
